@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Add Friend</h1>
+    <form action="/add_friend" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Add friend">
+    </form>
+    {% if success is not None and success is False %}
+        <p>Failed to find user with this email!</p>
+    {% endif %}
+{% endblock content %}

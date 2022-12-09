@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <form class="js-validate" method="post" action="{% url 'potluck:addItem' event.id %}">
+    {% csrf_token %}
+    <div class="container">
+      <h5 class="title">Add items to your potluck. You can add more than one items by clicking add.</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="labels">
+            Item Name
+            <span class="text-danger">*</span>
+          </label>
+          <span id="name">{{form.name}}</span>
+        </div>
+        <div class="col-md-6">
+          <label class="labels">
+            Quantity
+            <span class="text-danger">*</span>
+          </label>
+          <span id="quantity">{{form.quantity}}</span>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+          <label class="labels">
+            Any Descriptions or Requirements?
+            <span class="text-danger">*</span>
+          </label>
+          <span id="description">{{form.description}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="labels">
+            Will you be providing this item?
+            <span class="text-danger">*</span>
+          </label>
+          {{form.status}}
+        </div>
+        <div class="col-md-6">
+          <label class="labels">
+            How much does this item cost?
+            <span class="text-danger">*</span>
+          </label>
+          <span id="price">{{form.price}}</span>
+        </div>
+      </div>
+      <br />
+      <div class="d-flex justify-content-between align-items-center">
+        <button id="add" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#cancel">Add</button>
+        <a id="finish" href="{% url 'potluck:finish' event.id %}" class="btn btn-primary btn-round">Finish</a>
+      </div>
+    </div>
+  </form>
+  <div class="tables-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <h2 class="title mb-4">List of your items and details.</h2>
+          <div class="section-space"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive mb-0">
+                  <table class="table table-pricing">
+                    <thead class="text-primary">
+                      <tr>
+                        <th class="p-5">
+                          <img src="{% static 'assets/img/bg4.png'%}" class="background">
+                          <img src="{% static 'assets/img/man-up.png'%}" class="man">
+                          <img src="{% static 'assets/img/girl-up.png'%}" class="girl">
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Item Name</h3>
+                          <h5 class="desc"> Name of the items</h5>
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Estimate Price</h3>
+                          <h5 class="desc"> Estimate price of the item for spliting the bills later on.</h5>
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Status</h3>
+                          <h5 class="desc"> Will you be providing this item at your potluck?</h5>
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Quantity</h3>
+                          <h5 class="desc"> Number of specific items</h5>
+                          {% comment %} <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a> {% endcomment %}
+                          {% comment %} <a href="javascript:void(0)">Learn more</a> {% endcomment %}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="bg-primary">
+                        <td class="text-white">
+                          <b>Your Listed Items</b>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      {% for item in items %}
+                      <tr>
+                        <td>
+                          You Listed
+                        </td>
+                        <td>
+                          {% comment %} <i class="tim-icons icon-check-2 text-success"></i> {% endcomment %}
+                          {{item.name}}
+                        </td>
+                        <td>
+                          {{item.price}}
+                        </td>
+                        <td>
+                          {{item.status}}
+                        </td>
+                        <td>
+                          {{item.quantity}}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

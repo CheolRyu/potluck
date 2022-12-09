@@ -1,0 +1,94 @@
+<!--
+ =========================================================
+ * Blk• Design System Pro - v1.0.0
+ =========================================================
+
+ * Product Page: https://www.creative-tim.com/product/blk-design-system-pro
+ * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+
+ * Coded by www.creative-tim.com
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ -->
+ {% load static%}
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png'%}">
+   <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png'%}">
+   <title>
+     Blk• Design System Pro by Creative Tim
+   </title>
+   <!--     Fonts and icons     -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+   <!-- Nucleo Icons -->
+   <link href="{% static 'assets/css/nucleo-icons.css'%}" rel="stylesheet" />
+   <!-- CSS Files -->
+   <link href="{% static 'assets/css/blk-design-system-pro.css'%}" rel="stylesheet" />
+ </head>
+ 
+ <body class="login-page">
+   <div class="squares square1"></div>
+   <div class="squares square2"></div>
+   <div class="squares square3"></div>
+   <div class="squares square4"></div>
+   <div class="squares square5"></div>
+   <div class="squares square6"></div>
+   <div class="page-header">
+     <div class="page-header-image"></div>
+     <div class="container">
+       <div class="col-lg-5 col-md-8 mx-auto">
+         <div class="card card-login">
+           <form class="form" method="post" action="{% url 'potluck:login'%}">
+              {% csrf_token %}
+             <div class="card-header">
+               <img class="card-img" src="{% static 'assets/img/square-purple-1.png'%}" alt="Card image">
+               <h4 class="card-title">Login</h4>
+             </div>
+             <div class="card-body">
+               <div class="input-group input-lg">
+                 <div class="input-group-prepend">
+                   <span class="input-group-text"><i class="tim-icons icon-single-02"></i></span>
+                 </div>
+                 {{form.username}}
+               </div>
+               <div class="input-group input-lg">
+                 <div class="input-group-prepend">
+                   <span class="input-group-text"><i class="tim-icons icon-caps-small"></i></span>
+                 </div>
+                 {{form.password}}
+               </div>
+             </div>
+             {% if user_found == False %}
+              <p class="text-center">User not found or password incorrect</p>
+             {% endif %}
+             <div class="card-footer text-center">
+               <button id="login-button" type="submit" class="btn btn-primary btn-round btn-lg btn-block">Login</button>
+             </div>
+             <div class="pull-left ml-3 mb-3">
+               <h6>
+                 <a href="{% url 'potluck:signup'%}" class="link footer-link">Create Account</a>
+               </h6>
+             </div>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+   <script>
+     window.TrackJS &&
+       TrackJS.install({
+         token: "ee6fab19c5a04ac1a32a645abde4613a",
+         application: "black-dashboard-pro"
+       });
+   </script>
+ </body>
+ 
+ </html>
+ 

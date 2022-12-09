@@ -1,0 +1,400 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PotLuck</title>
+    <meta name="description" content="">
+    <meta
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+    name="viewport"
+  />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="{% static 'assets/css/nucleo-icons.css'%}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="{% static 'assets/css/blk-design-system-pro.css'%}" rel="stylesheet" />
+
+  </head>
+  <body class="index-page">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
+      <div class="container">
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="{% url 'potluck:home'%}" rel="tooltip" title="Home">
+            <span>Potluck•</span>
+          </a>
+          <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <div class="navbar-collapse-header">
+            <div class="row">
+              <div class="col-6 collapse-brand">
+                <a>
+                  Options
+                </a>
+              </div>
+              <div class="col-6 collapse-close text-right">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="tim-icons icon-simple-remove"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item p-0">
+              <a class="nav-link" rel="tooltip" title="Friends" data-placement="bottom" href="">
+                <i class="tim-icons icon-single-02"></i>
+                <p class="d-lg-none d-xl-none">Friends</p>
+              </a>
+            </li>
+            <li class="nav-item p-0">
+              <a class="nav-link" rel="tooltip" title="Your Profile" data-placement="bottom">
+                <i class="tim-icons icon-controller"></i>
+                <p class="d-lg-none d-xl-none">Profile</p>
+              </a>
+            </li>
+            <li class="nav-item p-0">
+              <a class="nav-link" rel="tooltip" title="Logout" data-placement="bottom" href="">
+                <i class="tim-icons icon-button-power"></i>
+                <p class="d-lg-none d-xl-none">Logout</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a id="create_event" class="nav-link btn btn-primary d-none d-lg-block" href="{% url 'potluck:create' %}">
+                <i class="tim-icons icon-pencil"></i> Create Event
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item p-0">
+              <a class="nav-link" rel="tooltip" title="Logout" data-placement="bottom" href="">
+                <i class="tim-icons icon-button-power"></i>
+                <p class="d-lg-none d-xl-none">Logout</p>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="wrapper">
+        <div class="container">
+          <div class="section">
+          <div class="row justify-content-center">
+          {% block content %}
+            {% block homeContent %}
+            {% endblock %}
+            {% block createContent%}
+            {% endblock %}
+            {% block friendsContent %}
+            {% endblock %}
+          {% endblock %} 
+          </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer footer-black footer-big">
+      <div class="container">
+        <div class="content">
+          
+        </div>
+        <hr>
+        <div class="copyright float-right">
+          Copyright &#xA9; <script>
+            document.write(new Date().getFullYear())
+          </script> Potluck Team All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'assets/js/core/jquery.min.js'%}" type="text/javascript"></script>
+      <script src="{% static 'assets/js/core/popper.min.js'%}" type="text/javascript"></script>
+      <script src="{% static 'assets/js/core/bootstrap.min.js'%}" type="text/javascript"></script>
+      <script src="{% static 'assets/js/plugins/perfect-scrollbar.jquery.min.js'%}"></script>
+      <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+      <script src="{% static 'assets/js/plugins/bootstrap-switch.js'%}"></script>
+      <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+      <script src="{% static 'assets/js/plugins/nouislider.min.js'%}" type="text/javascript"></script>
+      <!--  Plugin for the Carousel, full documentation here: http://kenwheeler.github.io/slick/ -->
+      <script src="{% static 'assets/js/plugins/slick.js'%}" type="text/javascript"></script>
+      <!--  Plugin for the blob animation -->
+      <script src="{% static 'assets/js/plugins/anime.min.js'%}" type="text/javascript"></script>
+      <!-- Chart JS -->
+      <script src="{% static 'assets/js/plugins/chartjs.min.js'%}"></script>
+      <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+      <script src="{% static 'assets/js/plugins/moment.min.js'%}"></script>
+      <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+      <script src="{% static 'assets/js/plugins/bootstrap-tagsinput.js'%}"></script>
+      <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+      <script src="{% static 'assets/js/plugins/bootstrap-selectpicker.js'%}" type="text/javascript"></script>
+      <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+      <script src="{% static 'assets/js/plugins/bootstrap-datetimepicker.js'%}" type="text/javascript"></script>
+      <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+      <script src="{% static 'assets/js/plugins/jasny-bootstrap.min.js'%}"></script>
+      <!-- Control Center for Black UI Kit: parallax effects, scripts for the example pages etc -->
+      <!--  Google Maps Plugin    -->
+      {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> {% endcomment %}
+      <script src="{% static 'assets/js/blk-design-system-pro.min.js'%}" type="text/javascript"></script>
+      <script>
+        $(document).ready(function() {
+
+          // Activate Navbar
+          if ($('.nav-down').length != 0) {
+            blackKit.checkScrollForMovingNavbar();
+          };
+
+          // Carousel
+
+          $(".center").slick({
+            dots: false,
+            infinite: true,
+            centerMode: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 1,
+                  infinite: true,
+                }
+              },
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+              // You can unslick at a given breakpoint now by adding:
+              // settings: "unslick"
+              // instead of a settings object
+            ]
+          });
+
+          // Logo Carousel
+
+          $('.customer-logos').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2500,
+            arrows: false,
+            dots: false,
+            pauseOnHover: false,
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 4
+                }
+              },
+              {
+                breakpoint: 520,
+                settings: {
+                  slidesToShow: 3
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            ]
+          });
+
+          /**
+           * main.js
+           * http://www.codrops.com
+           *
+           * Licensed under the MIT license.
+           * http://www.opensource.org/licenses/mit-license.php
+           *
+           * Copyright 2017, Codrops
+           * http://www.codrops.com
+           */
+          {
+            class ImgItem {
+              constructor(el) {
+                this.DOM = {};
+                this.DOM.el = el;
+                this.DOM.svg = this.DOM.el.querySelector('.item__svg');
+                this.DOM.path = this.DOM.svg.querySelector('path');
+                this.paths = {};
+                this.paths.start = this.DOM.path.getAttribute('d');
+                this.paths.end = this.DOM.el.dataset.morphPath;
+                this.DOM.deco = this.DOM.svg.querySelector('.item__deco');
+                this.DOM.image = this.DOM.svg.querySelector('image');
+                this.DOM.title = this.DOM.el.querySelector('.item__meta > .item__title');
+                this.DOM.subtitle = this.DOM.el.querySelector('.item__meta > .item__subtitle');
+                this.CONFIG = {
+                  // Defaults:
+                  animation: {
+                    path: {
+                      duration: this.DOM.el.dataset.animationPathDuration || 1500,
+                      delay: this.DOM.el.dataset.animationPathDelay || 0,
+                      easing: this.DOM.el.dataset.animationPathEasing || 'easeOutElastic',
+                      elasticity: this.DOM.el.dataset.pathElasticity || 400,
+                      scaleX: this.DOM.el.dataset.pathScalex || 1,
+                      scaleY: this.DOM.el.dataset.pathScaley || 1,
+                      translateX: this.DOM.el.dataset.pathTranslatex || 0,
+                      translateY: this.DOM.el.dataset.pathTranslatey || 0,
+                      rotate: this.DOM.el.dataset.pathRotate || 0
+                    },
+                    image: {
+                      duration: this.DOM.el.dataset.animationImageDuration || 2000,
+                      delay: this.DOM.el.dataset.animationImageDelay || 0,
+                      easing: this.DOM.el.dataset.animationImageEasing || 'easeOutElastic',
+                      elasticity: this.DOM.el.dataset.imageElasticity || 400,
+                      scaleX: this.DOM.el.dataset.imageScalex || 1.1,
+                      scaleY: this.DOM.el.dataset.imageScaley || 1.1,
+                      translateX: this.DOM.el.dataset.imageTranslatex || 0,
+                      translateY: this.DOM.el.dataset.imageTranslatey || 0,
+                      rotate: this.DOM.el.dataset.imageRotate || 0
+                    },
+                    deco: {
+                      duration: this.DOM.el.dataset.animationDecoDuration || 2500,
+                      delay: this.DOM.el.dataset.animationDecoDelay || 0,
+                      easing: this.DOM.el.dataset.animationDecoEasing || 'easeOutQuad',
+                      elasticity: this.DOM.el.dataset.decoElasticity || 400,
+                      scaleX: this.DOM.el.dataset.decoScalex || 0.9,
+                      scaleY: this.DOM.el.dataset.decoScaley || 0.9,
+                      translateX: this.DOM.el.dataset.decoTranslatex || 0,
+                      translateY: this.DOM.el.dataset.decoTranslatey || 0,
+                      rotate: this.DOM.el.dataset.decoRotate || 0
+                    }
+                  }
+                };
+                this.initEvents();
+              }
+              initEvents() {
+                this.mouseenterFn = () => {
+                  this.mouseTimeout = setTimeout(() => {
+                    this.isActive = true;
+                    this.animate();
+                  }, 75);
+                }
+                this.mouseleaveFn = () => {
+                  clearTimeout(this.mouseTimeout);
+                  if (this.isActive) {
+                    this.isActive = false;
+                    this.animate();
+                  }
+                }
+                this.DOM.el.addEventListener('mouseenter', this.mouseenterFn);
+                this.DOM.el.addEventListener('mouseleave', this.mouseleaveFn);
+                this.DOM.el.addEventListener('touchstart', this.mouseenterFn);
+                this.DOM.el.addEventListener('touchend', this.mouseleaveFn);
+              }
+              getAnimeObj(targetStr) {
+                const target = this.DOM[targetStr];
+                let animeOpts = {
+                  targets: target,
+                  duration: this.CONFIG.animation[targetStr].duration,
+                  delay: this.CONFIG.animation[targetStr].delay,
+                  easing: this.CONFIG.animation[targetStr].easing,
+                  elasticity: this.CONFIG.animation[targetStr].elasticity,
+                  scaleX: this.isActive ? this.CONFIG.animation[targetStr].scaleX : 1,
+                  scaleY: this.isActive ? this.CONFIG.animation[targetStr].scaleY : 1,
+                  translateX: this.isActive ? this.CONFIG.animation[targetStr].translateX : 0,
+                  translateY: this.isActive ? this.CONFIG.animation[targetStr].translateY : 0,
+                  rotate: this.isActive ? this.CONFIG.animation[targetStr].rotate : 0
+                };
+                if (targetStr === 'path') {
+                  animeOpts.d = this.isActive ? this.paths.end : this.paths.start;
+                }
+                anime.remove(target);
+                return animeOpts;
+              }
+              animate() {
+                // Animate the path, the image and deco.
+                anime(this.getAnimeObj('path'));
+                anime(this.getAnimeObj('image'));
+                anime(this.getAnimeObj('deco'));
+                // Title and Subtitle animation
+                anime.remove(this.DOM.title);
+                anime({
+                  targets: this.DOM.title,
+                  easing: 'easeOutQuad',
+                  translateY: this.isActive ? [{
+                      value: '-50%',
+                      duration: 200
+                    },
+                    {
+                      value: ['50%', '0%'],
+                      duration: 200
+                    }
+                  ] : [{
+                      value: '50%',
+                      duration: 200
+                    },
+                    {
+                      value: ['-50%', '0%'],
+                      duration: 200
+                    }
+                  ],
+                  opacity: [{
+                      value: 0,
+                      duration: 200
+                    },
+                    {
+                      value: 1,
+                      duration: 200
+                    }
+                  ]
+                });
+                anime.remove(this.DOM.subtitle);
+                anime({
+                  targets: this.DOM.subtitle,
+                  easing: 'easeOutQuad',
+                  translateY: this.isActive ? {
+                    value: ['50%', '0%'],
+                    duration: 200,
+                    delay: 250
+                  } : {
+                    value: '0%',
+                    duration: 1
+                  },
+                  opacity: this.isActive ? {
+                    value: [0, 1],
+                    duration: 200,
+                    delay: 250
+                  } : {
+                    value: 0,
+                    duration: 1
+                  }
+                });
+              }
+            }
+
+            const items = Array.from(document.querySelectorAll('.item'));
+            const init = (() => items.forEach(item => new ImgItem(item)))();
+            setTimeout(() => document.body.classList.remove('loading'), 2000);
+          };
+
+        });
+      </script>
+      <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+      <script>
+        window.TrackJS &&
+          TrackJS.install({
+            token: "ee6fab19c5a04ac1a32a645abde4613a",
+            application: "black-dashboard-pro"
+          });
+      </script>
+  </body>
+</html>     

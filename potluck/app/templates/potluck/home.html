@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block homeContent %}
+{% if events %}
+<div class="cd-section" id="projects"><div class="container">
+  <div class="row">
+    <div class="col-lg-8 mr-auto ml-auto text-center mb-5">
+      <h1 class="title">All Potlucks</h1>
+    </div>
+  </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      {% for event in events %}
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header mt-2">
+            <div class="float-right">
+              <div class="dropdown">
+                <a href="{% url 'potluck:detail' event.id %}" class="btn btn-primary btn-round">
+                  View
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body text-center p-4">
+            <h2 class="card-title mb-0">{{event.name}}</h2>
+            <h4 class="card-title mb-0">{{event.owner}}</h4>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mr-auto ml-auto text-center mb-5">
+      <h2 class="title">No Potlucks</h2>
+      <p>Should create one!</p>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+/* 
+Useful globals like colors and fonts can go here as variables!  
+
+@import "globals.css"
+
+to use them!
+*/
+
+:root {
+    /* Main project colors */
+    --background-light: #fbf5f3;
+    --text-dark: #000022;
+    --burnt-orange: #e28413;
+    --darker-red: #c42847;
+    --lighter-red: #de3c4b;
+}

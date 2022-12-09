@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="col-lg-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{ event.owner}}'s Event. </h2>
+      <div class="media align-items-center">
+        <h3 class="h6 text-secondary mr-3">Attendees</h3>
+        <div class="media-body text-right">
+          <span>{{ event.attendees}} (People)</span>
+        </div>
+      </div>
+      <hr class="line-info mb-3">
+      <div class="media align-items-center">
+        <h3 class="h6 text-secondary mr-3">Location</h3>
+        <div class="media-body text-right">
+          <span>{{ event.location }}</span>
+        </div>
+      </div>
+      <hr class="line-info mb-3">   
+      <div class="media align-items-center">
+        <h3 class="h6">Starts at </h3>
+        <div class="media-body text-right">
+          <span class="font-weight-semi-bold">{{ event.start}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-8">
+  <form class="js-validate">
+    <div class="container">
+      <div class="tables-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 mx-auto">
+              <div>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive mb-0">
+                      <table class="table table-pricing">
+                        <thead class="text-primary">
+                          <tr>
+                            <th class="text-center">
+                              <h3 class="card-title">Item Name</h3>
+                            </th>
+                            <th class="text-center">
+                              <h3 class="card-title">Estimate Price</h3>
+                            </th>
+                            <th class="text-center">
+                              <h3 class="card-title">Status</h3>
+                            </th>
+                            <th class="text-center">
+                              <h3 class="card-title">Quantity</h3>
+                              {% comment %} <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a> {% endcomment %}
+                              {% comment %} <a href="javascript:void(0)">Learn more</a> {% endcomment %}
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="bg-primary">
+                            <td class="text-white">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                          </tr>
+                          {% for item in items %}
+                          <tr>
+                            <td>
+                              {% comment %} <i class="tim-icons icon-check-2 text-success"></i> {% endcomment %}
+                              {{item.name}}
+                            </td>
+                            <td>
+                              {{item.price}}
+                            </td>
+                            <td>
+                              {{item.status}}
+                            </td>
+                            <td>
+                              {{item.quantity}}
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <a href="javascript:;">
+        <span class="fas fa-angle-left mr-2"></span>Back</a>
+      <button type="submit" class="btn btn-primary btn-round">Confirm</button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block homeContent %}
+<header>
+    <h1>{{profile.user}}'s Friends</h1>
+</header>
+<main>
+    <a href="{% url 'potluck:add_friend' %}">Add a friend</a>
+    <hr>
+    <div>
+        {% if friends is None %}
+            <h1>No Friends Yet!</h1>
+        {% else %}
+            {% for friend in friends %}
+                <div>
+                    <h1>{{friend.user}}</h1>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

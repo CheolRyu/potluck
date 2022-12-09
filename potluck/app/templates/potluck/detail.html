@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- <div class="features-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <span class="badge badge-primary badge-pill">Event Detail</span>
+          <h1 class="title">{{ event.owner }}'s {{ event.name }}</h1>
+        </div>
+      </div>
+  </div>
+  <div class="features-2 align-items-center">
+    <div class="container">
+      <a class="btn btn-primary btn-behance" href="{% url 'potluck:attend' event.id %}">
+        Attend <i class="tim-icons icon-alert-circle-exc"></i>
+      </a>
+      <div class="row">
+        <div class="col-lg-4 col-md-4">
+          <div class="info text-left bg-info">
+            <div class="icon icon-white">
+              <i class="tim-icons icon-satisfied"></i>
+            </div>
+            <h4 class="info-title">Attendees</h4>
+            <ul>
+                <li><a href="" class="description">Charles</a></li>
+                <li><a href="" class="description">Trevor</a></li>
+                <li><a href="" class="description">Sam</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="info text-left bg-info">
+          <h2 class="info-title">{{ event.name }}</h2>
+          <p class="description">Event Owner: {{ event.owner }}</p>
+          <p class="description">Description: {{ event.description }}</p>
+          <p class="description">Location: {{ event.location }}</p>
+          <p class="description">People Count: {{ event.attendees }}</p>
+          <p class="description">Start Date: {{ event.start }}</p>
+          {% for item in items %}
+            <div class="card">
+              <div class="container">
+                <p>Item: {{ item.name }}</p>
+                <p>Who's bringing it: {{ item.owner }}</p>
+                <p>Description: {{ item.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div>
+          {% if showMap %}
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{gMapsAddress}}&zoom=15&size=300x200&key=AIzaSyAqMfZ6VhIYHjNrsW2bjKQqRjTm6NNSgr8" alt="Map">
+          {% endif %}
+        </div>
+      </div>        
+    </div>
+  </div> -->
+  <div class="tables-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <h2 class="title mb-4">Event Details</h2>
+          <div class="section-space"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive mb-0">
+                  <table class="table table-pricing">
+                    <thead class="text-primary">
+                      <tr>
+                        <th class="p-5">
+                          <img src="{% static 'assets/img/bg4.png' %}" class="background">
+                          <img src="{% static 'assets/img/man-up.png' %}" class="man">
+                          <img src="{% static 'assets/img/girl-up.png' %}" class="girl">
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Bring your own</h3>
+                          <h5 class="desc"> You can bring your own items to the event.</h5>
+                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a>
+                          <a href="javascript:void(0)">Learn more</a>
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Entertainment Request</h3>
+                          <h5 class="desc"> You can request to have music or games to your likings.</h5>
+                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a>
+                          <a href="javascript:void(0)">Learn more</a>
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Coast</h3>
+                          <h5 class="desc">You can share billings with your friends.</h5>
+                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a>
+                          <a href="javascript:void(0)">Learn more</a>
+                        </th>
+                        <th class="text-center">
+                          <h3 class="card-title">Location</h3>
+                          <h5 class="desc"> Due to Privacy policy, preview is unavailible.</h5>
+                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Show Location</a>
+                          <a href="javascript:void(0)">Learn more</a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="bg-primary">
+                        <td class="text-white">
+                          <b>Items</b>
+                        </td>
+                        <td class="text-white">
+                          <b>Quantity</b>
+                        </td>
+                        <td class="text-white">
+                          <b>Status</b>
+                        </td>
+                        <td class="text-white">
+                          <b>Description</b>
+                        </td>
+                        <td class="text-white">
+                          <b>Starts</b>
+                        </td>
+                      </tr>
+                      {% for item in items %}
+                      <tr>
+                        <td>
+                          {{item.name}}<i class="tim-icons icon-alert-circle-exc ml-1"></i>
+                        </td>
+                        <td>
+                          {{item.quantity}}
+                        </td>
+                        <td>
+                          Free
+                        </td>
+                        <td>
+                          {{item.status}}
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)">Contact us</a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      <tr class="bg-primary">
+                        <td class="text-white">
+                          <b>Atendees</b>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Custom messages
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Multiple requests
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Team fundraising
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Basic donor data
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-check-2 text-success"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                        <td>
+                          <i class="tim-icons icon-simple-remove text-danger"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
