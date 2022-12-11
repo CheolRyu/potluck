@@ -2,38 +2,143 @@
 {% load static%}
 {% block homeContent %}
 {% if events %}
-<div class="cd-section" id="projects"><div class="container">
-  <div class="row">
-    <div class="col-lg-8 mr-auto ml-auto text-center mb-5">
-      <h1 class="title">All Potlucks</h1>
+<div class="projects-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mr-auto ml-auto text-center mb-5">
+        <h2 class="title">Welcome, {{user.name}}</h2>
+      </div>
     </div>
   </div>
-  </div>
+  <nav class="navbar navbar-expand-lg bg-transparent mb-5">
+    <div class="container">
+      <div class="navbar-translate">
+        <p>All Potlucks</p>
+      </div>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a href="javascript:;" class="nav-link dropdown-toggle" id="navbarOrder" data-toggle="dropdown" aria-expanded="false">
+            <p>A-to-Z</p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarOrder">
+            <a class="dropdown-item" href="javascript:;">
+              Z-to-A
+            </a>
+            <a class="dropdown-item" href="javascript:;">
+              Newest
+            </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="javascript:;" class="nav-link dropdown-toggle" id="navbarLatest" data-toggle="dropdown" aria-expanded="false">
+            <p>Latest</p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarLatest">
+            <a class="dropdown-item" href="javascript:;">
+              Newest
+            </a>
+            <a class="dropdown-item" href="javascript:;">
+              Most Popular
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div class="container">
     <div class="row">
       {% for event in events %}
       <div class="col-md-4">
         <div class="card">
           <div class="card-header mt-2">
+            <div class="float-left">
+              <i class="tim-icons icon-user-run d-inline text-danger"></i>
+              <p class="d-inline">{{ event.start}}</p>
+            </div>
             <div class="float-right">
               <div class="dropdown">
-                <a href="{% url 'potluck:detail' event.id %}" class="btn btn-primary btn-round">
-                  View
-                </a>
+                <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown" aria-expanded="false">
+                  <i class="tim-icons icon-zoom-split"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end">
+                  {% if request.user == event.profile %}
+                  <a class="dropdown-item" href="{% url 'potluck:attend' event.id %}"> 
+                    <i class="tim-icons icon-double-right"></i> 
+                    Edit
+                  </a>
+                  {% else %}
+                  <a class="dropdown-item" href="{% url 'potluck:attend' event.id %}"> 
+                    <i class="tim-icons icon-double-right"></i> 
+                    Attend
+                  </a>
+                  {% endif %}
+                  <a class="dropdown-item" href="javascript:;"> 
+                    <i class="tim-icons icon-heart-2"></i> 
+                    Save
+                  </a>
+                </div>
               </div>
             </div>
           </div>
           <div class="card-body text-center p-4">
-            <h2 class="card-title mb-0">{{event.name}}</h2>
-            <h4 class="card-title mb-0">{{event.owner}}</h4>
+            <a href="javascript:;">
+              <img src="assets/img/dribbble.png" alt="Host Profile Picture" class="img-fluid rounded-circle shadow" style="width: 100px;">
+            </a>
+            <h4 class="card-title mb-0">{{event.name}}</h4>
+            <p class="card-description">The time has come to bring our plans and ideas to life.</p>
+            <h5 class="card-title mt-4">Attendees</h5>
+            <div class="avatar-group">
+              <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                <img alt="Image placeholder" src="assets/img/james.jpg">
+              </a>
+              <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
+                <img alt="Image placeholder" src="assets/img/ryan.jpg">
+              </a>
+              <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
+                <img alt="Image placeholder" src="assets/img/lora.jpg">
+              </a>
+              <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
+                <img alt="Image placeholder" src="assets/img/mike.jpg">
+              </a>
+            </div>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-    </div>
+    <footer class="mt-5">
+      <ul class="pagination float-left">
+        <li class="page-item">
+          <a class="page-link" href="#link" aria-label="Previous">
+            <span aria-hidden="true"><i class="tim-icons icon-double-left" aria-hidden="true"></i></span>
+          </a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#link">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#link">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#link">...</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#link">6</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#link" aria-label="Next">
+            <span aria-hidden="true"><i class="tim-icons icon-double-right" aria-hidden="true"></i></span>
+          </a>
+        </li>
+      </ul>
+      <div class="text-right">
+        <p>Showing -- out of --</p>
+      </div>
+    </footer>
     </div>
   </div>
+
+
 </div>
 {% else %}
 <div class="container">

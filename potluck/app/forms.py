@@ -47,6 +47,13 @@ class ItemForm(forms.ModelForm):
             'price': forms.NumberInput(attrs={'placeholder': 'Price', 'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}, choices=SELECT_CHOICES),
         }
+class ItemUpdate(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['status']
+        widgets = {
+            'status': forms.Select(attrs={'class': 'form-control'}, choices=SELECT_CHOICES),
+        }
 
 
 class FriendForm(forms.Form):

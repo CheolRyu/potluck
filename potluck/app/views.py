@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SignupForm, EventForm, FriendForm, ItemForm
+from .forms import LoginForm, SignupForm, EventForm, FriendForm, ItemForm, ItemUpdate
 from .models import Profile, Event, Friend, Item, Guest
 
 
@@ -55,7 +55,9 @@ def signup(request):
 def home(request):
     profile = Profile.objects.get(user=request.user)
     events = Event.objects.all()
-    return render(request, 'potluck/home.html', {'profile': profile, 'events': events})
+    eventUser = Event.objects.filter(owner=profile)
+    print(request.user, eventUser)
+    return render(request, 'potluck/home.html', {'profile': profile, 'events': events, 'eventUser': eventUser})
 
 
 @login_required
@@ -137,7 +139,6 @@ def detail(request, event_id):
 @login_required
 def update(request, event_id):
     event = Event.objects.get(id=event_id)
-    items = Item.objects.filter(event=event)
     form = EventForm(request.POST or None, instance=event)
     if form.is_valid():
         form.save()
@@ -150,16 +151,15 @@ def attend(request, event_id):
     user = request.user
     event = Event.objects.get(id=event_id)
     profile = Profile.objects.get(user=request.user)
-    items = Item.objects.filter(id=event_id)
-    form = ItemForm()
-
+    items = Item.objects.filter(event=event_id, status='no')
+    form = ItemUpdate()
     if request.method == 'POST':
-        name = request.POST['name']
-        description = request.POST['description']
-        Item.objects.create(name=name, owner=profile,
-                            event=event, description=description)
-        Event.objects.update(attendees=event.attendees + 1)
-        return redirect('potluck:home')
+        if 'status' in request.POST:
+            status = 'yes'
+            Item.objects.filter(event=event_id, status=request.POST['status']).update(status=status)
+            return redirect('potluck:home')
+        else:
+            return redirect('potluck:home')
     return render(request, 'potluck/attend_confirm.html', {'form': form, 'event': event, 'user': user, 'items': items})
 
 

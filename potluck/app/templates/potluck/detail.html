@@ -47,9 +47,7 @@
           {% endfor %}
         </div>
         <div>
-          {% if showMap %}
-          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{gMapsAddress}}&zoom=15&size=300x200&key=AIzaSyAqMfZ6VhIYHjNrsW2bjKQqRjTm6NNSgr8" alt="Map">
-          {% endif %}
+
         </div>
       </div>        
     </div>
@@ -60,6 +58,9 @@
         <div class="col-md-6 ml-auto mr-auto text-center">
           <h2 class="title mb-4">Event Details</h2>
           <div class="section-space"></div>
+          <a class="btn btn-primary btn-behance" href="{% url 'potluck:attend' event.id %}">
+            Attend <i class="tim-icons icon-alert-circle-exc"></i>
+          </a>
         </div>
       </div>
       <div class="row">
@@ -79,26 +80,18 @@
                         <th class="text-center">
                           <h3 class="card-title">Bring your own</h3>
                           <h5 class="desc"> You can bring your own items to the event.</h5>
-                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a>
-                          <a href="javascript:void(0)">Learn more</a>
                         </th>
                         <th class="text-center">
                           <h3 class="card-title">Entertainment Request</h3>
                           <h5 class="desc"> You can request to have music or games to your likings.</h5>
-                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a>
-                          <a href="javascript:void(0)">Learn more</a>
                         </th>
                         <th class="text-center">
                           <h3 class="card-title">Coast</h3>
                           <h5 class="desc">You can share billings with your friends.</h5>
-                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Get started</a>
-                          <a href="javascript:void(0)">Learn more</a>
-                        </th>
+                        </th>                        
                         <th class="text-center">
                           <h3 class="card-title">Location</h3>
                           <h5 class="desc"> Due to Privacy policy, preview is unavailible.</h5>
-                          <a href="javascript:void(0)" class="btn btn-info btn-sm">Show Location</a>
-                          <a href="javascript:void(0)">Learn more</a>
                         </th>
                       </tr>
                     </thead>
