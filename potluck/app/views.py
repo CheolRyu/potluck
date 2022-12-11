@@ -55,9 +55,7 @@ def signup(request):
 def home(request):
     profile = Profile.objects.get(user=request.user)
     events = Event.objects.all()
-    eventUser = Event.objects.filter(owner=profile)
-    print(request.user, eventUser)
-    return render(request, 'potluck/home.html', {'profile': profile, 'events': events, 'eventUser': eventUser})
+    return render(request, 'potluck/home.html', {'profile': profile, 'events': events})
 
 
 @login_required
@@ -154,9 +152,8 @@ def attend(request, event_id):
     items = Item.objects.filter(event=event_id, status='no')
     form = ItemUpdate()
     if request.method == 'POST':
-        if 'status' in request.POST:
-            status = 'yes'
-            Item.objects.filter(event=event_id, status=request.POST['status']).update(status=status)
+        if 'status' in request.POST and request.POST['status'] == 'yes':
+            Item.objects.filter(event=event_id).update(fulilled=True)
             return redirect('potluck:home')
         else:
             return redirect('potluck:home')

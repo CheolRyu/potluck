@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 mr-auto ml-auto text-center mb-5">
-        <h2 class="title">Welcome, {{user.name}}</h2>
+        <h2 class="title">Welcome {{request.user}}!</h2>
       </div>
     </div>
   </div>
@@ -61,8 +61,8 @@
                   <i class="tim-icons icon-zoom-split"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end">
-                  {% if request.user == event.profile %}
-                  <a class="dropdown-item" href="{% url 'potluck:attend' event.id %}"> 
+                  {% if event.owner == profile %}
+                  <a class="dropdown-item" href="{% url 'potluck:update' event.id %}"> 
                     <i class="tim-icons icon-double-right"></i> 
                     Edit
                   </a>
@@ -71,11 +71,12 @@
                     <i class="tim-icons icon-double-right"></i> 
                     Attend
                   </a>
-                  {% endif %}
+                  
                   <a class="dropdown-item" href="javascript:;"> 
                     <i class="tim-icons icon-heart-2"></i> 
                     Save
                   </a>
+                  {% endif %}
                 </div>
               </div>
             </div>
