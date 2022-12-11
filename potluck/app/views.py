@@ -185,3 +185,7 @@ def add_friend(request):
             return render(request, 'potluck/add_friend.html', {'form': form, 'success': False})
     else:
         return render(request, 'potluck/add_friend.html', {'form': form, 'success': None})
+def profile(request):
+    profile = Profile.objects.get(user=request.user)
+    events = Event.objects.filter(owner=profile)
+    return render(request, 'potluck/profile.html', {'profile': profile, 'events': events})
