@@ -87,10 +87,9 @@ class Request(models.Model):
 
 
 class Entertainment(models.Model):
-    owner = models.ForeignKey(Guest, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     category = models.CharField(max_length=140, default='')
     description = models.TextField(max_length=2000, default='')
 
     def __str__(self):
-        return str(self.name)
+        return str(self.description)
