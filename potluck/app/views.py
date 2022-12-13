@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SignupForm, EventForm, FriendForm, ItemForm, ItemUpdate
-from .models import Profile, Event, Friend, Item, Guest
+from .forms import LoginForm, SignupForm, EventForm, FriendForm, ItemForm, ItemUpdate, EntertainmentForm
+from .models import Profile, Event, Friend, Item, Guest, Entertainment
 from django.core.mail import send_mass_mail
 
 
@@ -136,6 +136,33 @@ def addItem(request, event_id):
         return redirect('potluck:addItem', event_id=event_id)
     return render(request, 'potluck/add_item.html', {'form': form, 'event': event, 'items': items})
 
+@login_required
+def addGuest(request, event_id):
+    event = Event.objects.get(id=event_id)
+    profile = Profile.objects.get(user = request.user)
+    Guest.objects.create(event = event, profile = profile)
+    return redirect('potluck:addEntertainment', event_id=event_id)
+    
+    # guestid = Guest.objects.get(profile = profile).id
+
+@login_required
+def addEntertainment(request, event_id):
+    event = Event.objects.get(id=event_id)
+    form = ItemForm()
+    
+    if request.method == 'POST':
+        event = Event.objects.get(id=event_id)
+        category = request.POST['category']
+        description = request.POST['description']
+        Entertainment.objects.create(
+            event=event,
+            category=category,
+            description=description,
+            
+        )
+        return redirect('potluck:addEntertainment', event_id=event_id)
+    return render(request, 'potluck/entertainment.html', {'form': form, 'event': event})
+
 def finish(request, event_id):
     items = Item.objects.filter(event=event_id)
     print(items)
@@ -170,13 +197,14 @@ def attend(request, event_id):
     profile = Profile.objects.get(user=request.user)
     items = Item.objects.filter(event=event_id, status='no')
     form = ItemUpdate()
+    entertainmentForm = EntertainmentForm()
     if request.method == 'POST':
         if 'status' in request.POST and request.POST['status'] == 'yes':
             # Item.objects.filter(event=event_id).update(fulfilled=True)
             return redirect('potluck:home')
         else:
             return redirect('potluck:home')
-    return render(request, 'potluck/attend_confirm.html', {'form': form, 'event': event, 'user': user, 'items': items})
+    return render(request, 'potluck/attend_confirm.html', {'form': form, 'entertainmentForm': entertainmentForm, 'event': event, 'user': user, 'items': items})
 
 
 @login_required
