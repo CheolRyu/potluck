@@ -53,7 +53,7 @@
           <div class="card-header mt-2">
             <div class="float-left">
               <i class="tim-icons icon-user-run d-inline text-danger"></i>
-              <p class="d-inline">{{ event.start}}</p>
+              <p class="d-inline">{{event.owner}}'s Event</p>
             </div>
             <div class="float-right">
               <div class="dropdown">
@@ -85,8 +85,8 @@
             <a href="javascript:;">
               <img src="assets/img/dribbble.png" alt="Host Profile Picture" class="img-fluid rounded-circle shadow" style="width: 100px;">
             </a>
-            <h4 class="card-title mb-0">{{event.name}}</h4>
-            <p class="card-description">The time has come to bring our plans and ideas to life.</p>
+            <h4 class="card-title mb-0">starts at: - {{event.start}}</h4>
+            <p class="card-description">{{event.description}}</p>
             <h5 class="card-title mt-4">Attendees</h5>
             <div class="avatar-group">
               <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">

@@ -4,7 +4,7 @@
 {% block content %}
 <div class="col">
   <!-- comment -->
-  <form class="js-validate" method="post" action="{% url 'potluck:create'%}">
+  <form class="js-validate" method="post" action="{% url 'potluck:update' event.id %}">
     {% csrf_token %}
     <div class="container">
       <h5 class="title">Event Details</h5>
@@ -14,14 +14,14 @@
             Event Name
             <span class="text-danger">*</span>
           </label>
-          {{event_form.name}}
+          {{form.name}}
         </div>
         <div class="col-md-6">
           <label class="labels">
             Start Date and Time
             <span class="text-danger">*</span>
           </label>
-          {{event_form.start}}
+          {{form.start}}
         </div>
       </div>
       <br>
@@ -31,14 +31,14 @@
             Any Descriptions or Requirements?
             <span class="text-danger">*</span>
           </label>
-          {{event_form.description}}
+          {{form.description}}
         </div>
         <div class="col-md-6">
           <label class="labels">
             What time is the event?
             <span class="text-danger">*</span>
           </label>
-          {{event_form.time}}
+          {{form.time}}
         </div>
       </div>
       <br>
@@ -49,7 +49,7 @@
               Street address
               <span class="text-danger">*</span>
             </label>
-            {{event_form.address}}
+            {{form.address}}
           </div>
         </div>
         <div class="col-md-4">
@@ -58,7 +58,7 @@
               Postcode/Zip
               <span class="text-danger">*</span>
             </label>
-            {{event_form.zip_code}}
+            {{form.zip_code}}
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
             <label class="labels">
               Apt, suite, etc.
             </label>
-            {{event_form.apt}}
+            {{form.apt}}
           </div>
         </div>
         <div class="col-md-4">
@@ -78,7 +78,7 @@
               City
               <span class="text-danger">*</span>
             </label>
-            {{event_form.city}}
+            {{form.city}}
           </div>
         </div>
         <div class="col-md-4">
@@ -87,19 +87,17 @@
               State
               <span class="text-danger">*</span>
             </label>
-            {{event_form.state}}
+            {{form.state}}
           </div>
         </div>
       </div>
       <br>
       <div class="d-flex justify-content-between align-items-center">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancel">Cancel</button>
-        <button id="next" type="submit" class="btn btn-primary btn-round">Next</button>
+        <button id="next" type="submit" class="btn btn-primary btn-round">update</button>
       </div>
     </div>
   </form>
-</div>
-</div>
 </div>
 
 <div class="modal fade" id="cancel" tabindex="-1" role="dialog" aria-labelledby="cancelTitle" aria-hidden="true">

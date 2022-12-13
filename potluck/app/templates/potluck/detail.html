@@ -1,66 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- <div class="features-1">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 ml-auto mr-auto">
-          <span class="badge badge-primary badge-pill">Event Detail</span>
-          <h1 class="title">{{ event.owner }}'s {{ event.name }}</h1>
-        </div>
-      </div>
-  </div>
-  <div class="features-2 align-items-center">
-    <div class="container">
-      <a class="btn btn-primary btn-behance" href="{% url 'potluck:attend' event.id %}">
-        Attend <i class="tim-icons icon-alert-circle-exc"></i>
-      </a>
-      <div class="row">
-        <div class="col-lg-4 col-md-4">
-          <div class="info text-left bg-info">
-            <div class="icon icon-white">
-              <i class="tim-icons icon-satisfied"></i>
-            </div>
-            <h4 class="info-title">Attendees</h4>
-            <ul>
-                <li><a href="" class="description">Charles</a></li>
-                <li><a href="" class="description">Trevor</a></li>
-                <li><a href="" class="description">Sam</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="info text-left bg-info">
-          <h2 class="info-title">{{ event.name }}</h2>
-          <p class="description">Event Owner: {{ event.owner }}</p>
-          <p class="description">Description: {{ event.description }}</p>
-          <p class="description">Location: {{ event.location }}</p>
-          <p class="description">People Count: {{ event.attendees }}</p>
-          <p class="description">Start Date: {{ event.start }}</p>
-          {% for item in items %}
-            <div class="card">
-              <div class="container">
-                <p>Item: {{ item.name }}</p>
-                <p>Who's bringing it: {{ item.owner }}</p>
-                <p>Description: {{ item.description }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-        <div>
-
-        </div>
-      </div>        
-    </div>
-  </div> -->
   <div class="tables-2">
     <div class="container">
       <div class="row">
         <div class="col-md-6 ml-auto mr-auto text-center">
           <h2 class="title mb-4">Event Details</h2>
           <div class="section-space"></div>
+          {% if event.owner == profile %}
+          <a class="btn btn-primary btn-behance" href="{% url 'potluck:update' event.id %}">
+            Edit <i class="tim-icons icon-alert-circle-exc"></i>
+          </a>
+          {% else %}
           <a class="btn btn-primary btn-behance" href="{% url 'potluck:attend' event.id %}">
             Attend <i class="tim-icons icon-alert-circle-exc"></i>
           </a>
+          {% endif %}
         </div>
       </div>
       <div class="row">
@@ -155,57 +110,6 @@
                         </td>
                         <td>
                           <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Multiple requests
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-simple-remove text-danger"></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Team fundraising
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-check-2 text-success"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-check-2 text-success"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-check-2 text-success"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-check-2 text-success"></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Basic donor data
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-check-2 text-success"></i>
-                        </td>
-                        <td>
-                          <i class="tim-icons icon-check-2 text-success"></i>
                         </td>
                         <td>
                           <i class="tim-icons icon-simple-remove text-danger"></i>

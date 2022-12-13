@@ -138,7 +138,7 @@ def addItem(request, event_id):
 
 def finish(request, event_id):
     items = Item.objects.filter(event=event_id)
-    print(items)
+    print('hello world')
     for item in items:
         if item.status == 'Yes':
             item.owner = request.user
@@ -150,17 +150,28 @@ def finish(request, event_id):
 def detail(request, event_id):
     event = Event.objects.get(id=event_id)
     items = Item.objects.filter(event=event)
-    return render(request, 'potluck/detail.html', {'event': event, 'items': items})
+    profile = Profile.objects.get(user=request.user)
+    return render(request, 'potluck/detail.html', {'event': event, 'items': items, 'profile': profile})
 
 
 @login_required
 def update(request, event_id):
     event = Event.objects.get(id=event_id)
-    form = EventForm(request.POST or None, instance=event)
-    if form.is_valid():
-        form.save()
-        return redirect('potluck:home')
-    return render(request, 'potluck/create_event.html', {'form': form, 'event': event})
+    items = Item.objects.filter(event=event)
+    form = EventForm()
+    if request.method == 'POST':
+        event.name = request.POST['name']
+        event.address = request.POST['address']
+        event.city = request.POST['city']
+        event.state = request.POST['state']
+        event.zip_code = request.POST['zip_code']
+        event.apt = request.POST['apt']
+        event.description = request.POST['description']
+        event.start = request.POST['start']
+        event.time = request.POST['time']
+        event.save()
+        return redirect('potluck:detail', event_id=event_id)
+    return render(request, 'potluck/update_event.html', {'event': event, 'items': items, 'form': form})
 
 
 @login_required
@@ -170,9 +181,13 @@ def attend(request, event_id):
     profile = Profile.objects.get(user=request.user)
     items = Item.objects.filter(event=event_id, status='no')
     form = ItemUpdate()
+    print(request.POST)
     if request.method == 'POST':
         if 'status' in request.POST and request.POST['status'] == 'yes':
-            # Item.objects.filter(event=event_id).update(fulfilled=True)
+            Item.objects.filter(event=event_id, status='no').update(status='yes', owner=profile)
+            return redirect('potluck:home')
+        elif 'status' in request.POST and request.POST['status'] == 'no':
+            Item.objects.filter(event=event_id, status='no').update(status='no', owner=None)
             return redirect('potluck:home')
         else:
             return redirect('potluck:home')
