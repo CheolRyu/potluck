@@ -1,9 +1,14 @@
 from django import forms
-from .models import Event, Profile, Guest, Item
+from .models import Event, Profile, Guest, Item, Entertainment
 
 SELECT_CHOICES = [
     ('yes', 'Yes'),
     ('no', 'No'),
+]
+
+ENTERTAINMENT_CHOICES = [
+    ('game', 'Game'),
+    ('music', 'Music'),
 ]
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control",  "placeholder": "Username"}))
@@ -55,6 +60,14 @@ class ItemUpdate(forms.ModelForm):
             'status': forms.Select(attrs={'class': 'form-control'}, choices=SELECT_CHOICES),
         }
 
+class EntertainmentForm(forms.ModelForm):
+    class Meta:
+        model = Entertainment
+        fields = ['category', 'description']
+        widgets = {
+            'description': forms.Textarea(attrs={'placeholder': 'Description', 'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}, choices=ENTERTAINMENT_CHOICES),
+        }
 
 class FriendForm(forms.Form):
     CHOICES = Profile.objects
