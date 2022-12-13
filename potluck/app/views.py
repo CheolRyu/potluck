@@ -153,7 +153,7 @@ def attend(request, event_id):
     form = ItemUpdate()
     if request.method == 'POST':
         if 'status' in request.POST and request.POST['status'] == 'yes':
-            Item.objects.filter(event=event_id).update(fulilled=True)
+            # Item.objects.filter(event=event_id).update(fulfilled=True)
             return redirect('potluck:home')
         else:
             return redirect('potluck:home')
@@ -185,3 +185,7 @@ def add_friend(request):
             return render(request, 'potluck/add_friend.html', {'form': form, 'success': False})
     else:
         return render(request, 'potluck/add_friend.html', {'form': form, 'success': None})
+def profile(request):
+    profile = Profile.objects.get(user=request.user)
+    events = Event.objects.filter(owner=profile)
+    return render(request, 'potluck/profile.html', {'profile': profile, 'events': events})
