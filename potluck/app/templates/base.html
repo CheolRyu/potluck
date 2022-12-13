@@ -66,9 +66,10 @@
                 <p class="d-lg-none d-xl-none">Logout</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a id="create_event" class="nav-link btn btn-primary d-none d-lg-block" href="{% url 'potluck:create' %}">
-                <i class="tim-icons icon-pencil"></i> Create Event
+            <li class="nav-item p-0">
+              <a class="nav-link" rel="tooltip" title="Create Event" data-placement="bottom" href="{% url 'potluck:create' %}">
+                <i class="tim-icons icon-pencil"></i>
+                <p class="d-lg-none d-xl-none">Create Event</p>
               </a>
             </li>
             {% else %}
