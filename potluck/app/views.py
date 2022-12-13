@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm, EventForm, FriendForm, ItemForm, ItemUpdate
 from .models import Profile, Event, Friend, Item, Guest
 from django.core.mail import send_mass_mail
+import requests
+import json
+import urllib.parse
 
 
 def index(request):
@@ -136,6 +139,7 @@ def addItem(request, event_id):
         return redirect('potluck:addItem', event_id=event_id)
     return render(request, 'potluck/add_item.html', {'form': form, 'event': event, 'items': items})
 
+@login_required
 def finish(request, event_id):
     items = Item.objects.filter(event=event_id)
     print('hello world')
@@ -146,12 +150,31 @@ def finish(request, event_id):
             item.fulfilled = False
         item.save()
     return redirect('potluck:home')
+
 @login_required
 def detail(request, event_id):
     event = Event.objects.get(id=event_id)
+    location = str(event.address + " " + event.city + " " + event.state + " " + event.zip_code)
+    validationLoad = {
+        "address": {
+            "addressLines": [location]
+        },
+        "previousResponseId": "",
+        "enableUspsCass": False
+    }
+    validationLoad = json.dumps(validationLoad)
+    validationResponse = json.loads(requests.post(
+        "https://addressvalidation.googleapis.com/v1:validateAddress?key=AIzaSyBa3ThHroUe3FVxsQhIph4aYDNCB6aAgnA", validationLoad).text)
+    print(validationResponse)
+    gMapsAddress = None
+    try:
+        validAddress = validationResponse["result"]["verdict"]["addressComplete"]
+    except KeyError:
+        validAddress = False
+    if validAddress:
+        gMapsAddress = urllib.parse.quote(location)
     items = Item.objects.filter(event=event)
-    profile = Profile.objects.get(user=request.user)
-    return render(request, 'potluck/detail.html', {'event': event, 'items': items, 'profile': profile})
+    return render(request, 'potluck/detail.html', {'event': event, 'items': items, 'gMapsAddress': gMapsAddress})
 
 
 @login_required
@@ -219,6 +242,8 @@ def add_friend(request):
             return render(request, 'potluck/add_friend.html', {'form': form, 'success': False})
     else:
         return render(request, 'potluck/add_friend.html', {'form': form, 'success': None})
+
+@login_required
 def profile(request):
     profile = Profile.objects.get(user=request.user)
     events = Event.objects.filter(owner=profile)
