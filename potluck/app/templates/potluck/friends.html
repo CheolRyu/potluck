@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block homeContent %}
+<div class='d-flex flex-column align-items-center'>
 <header>
     <h1>{{profile.user}}'s Friends</h1>
 </header>
@@ -18,4 +19,5 @@
         {% endif %}
     </div>
 </main>
+</div>
 {% endblock %}
