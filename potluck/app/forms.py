@@ -21,7 +21,7 @@ class SignupForm(forms.Form):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['owner', 'name', 'start', 'time', 'address', 'description', 'city', 'state', 'zip_code', 'apt']
+        fields = ['owner', 'name', 'time', 'address', 'description', 'city', 'state', 'zip_code', 'apt']
         widgets = {
             'start': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
             'time': forms.TimeInput(format=('%H:%M'), attrs={'class':'form-control', 'placeholder':'Select a time', 'type':'time'}),
