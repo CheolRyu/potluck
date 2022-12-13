@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm, EventForm, FriendForm, ItemForm, ItemUpdate
 from .models import Profile, Event, Friend, Item, Guest
+from django.core.mail import send_mass_mail
 
 
 def index(request):
@@ -72,7 +73,6 @@ def create_event(request):
     }
     if request.method == 'POST':
         name = request.POST['name']
-        start = request.POST['start']
         address = request.POST['address']
         city = request.POST['city']
         state = request.POST['state']
@@ -83,7 +83,6 @@ def create_event(request):
         owner = Profile.objects.get(user=user)
         Event.objects.create(
             name=name,
-            start=start,
             address=address,
             city=city,
             description=description,
@@ -93,6 +92,23 @@ def create_event(request):
             apt=apt,
             time=time
         )
+
+        # send email to friends
+        friends = Friend.objects.filter(current_user=owner)
+        emails = list(map(lambda friend: friend.user.user.email, friends))
+        message = (
+            str("Your friend has created a new event!"),
+            ("Your friend " +
+             str(owner) + " has created a new event! Log on to check it out."),
+            str("donotreply@potluck.com"),
+            emails
+        )
+        try:
+            send_mass_mail([message], fail_silently=False)
+            print("SENT MAIL")
+        except Exception:
+            print("FAILED TO SEND MAIL")
+
         return redirect('potluck:addItem', event_id=Event.objects.get(name=name).id)
     return render(request, 'potluck/create_event.html', context)
 
