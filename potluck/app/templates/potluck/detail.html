@@ -61,6 +61,9 @@
           <a class="btn btn-primary btn-behance" href="{% url 'potluck:attend' event.id %}">
             Attend <i class="tim-icons icon-alert-circle-exc"></i>
           </a>
+          {% if gMapsAddress is not None %}
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center={{gMapsAddress}}&zoom=15&size=300x200&key=AIzaSyAqMfZ6VhIYHjNrsW2bjKQqRjTm6NNSgr8" alt="Map">
+          {% endif %}
         </div>
       </div>
       <div class="row">
