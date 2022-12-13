@@ -79,6 +79,7 @@ def create_event(request):
         zip_code = request.POST['zip_code']
         apt = request.POST['apt']
         description = request.POST['description']
+        start = request.POST['start']
         time = request.POST['time']
         owner = Profile.objects.get(user=user)
         Event.objects.create(
@@ -90,7 +91,8 @@ def create_event(request):
             state=state,
             zip_code=zip_code,
             apt=apt,
-            time=time
+            time=time,
+            start=start
         )
 
         # send email to friends
