@@ -151,7 +151,7 @@ def addGuest(request, event_id):
 @login_required
 def addEntertainment(request, event_id):
     event = Event.objects.get(id=event_id)
-    form = ItemForm()
+    form = EntertainmentForm()
     
     if request.method == 'POST':
         event = Event.objects.get(id=event_id)
@@ -164,7 +164,7 @@ def addEntertainment(request, event_id):
             
         )
         return redirect('potluck:addEntertainment', event_id=event_id)
-    return render(request, 'potluck/entertainment.html', {'form': form, 'event': event})
+    return render(request, 'potluck/entertainment.html', {'entertainmentForm': EntertainmentForm, 'event': event})
 
 def finish(request, event_id):
     items = Item.objects.filter(event=event_id)
