@@ -120,9 +120,10 @@ def addItem(request, event_id):
 
 def finish(request, event_id):
     items = Item.objects.filter(event=event_id)
+    print(items)
     for item in items:
         if item.status == 'Yes':
-            item.fulfilled = True
+            item.owner = request.user
         else:
             item.fulfilled = False
         item.save()

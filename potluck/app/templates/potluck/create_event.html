@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="col">
+  <!-- comment -->
   <form class="js-validate" method="post" action={% url 'potluck:create'%}>
     {% csrf_token %}
     <div class="container">
