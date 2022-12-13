@@ -49,7 +49,7 @@
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
             <li class="nav-item p-0">
-              <a class="nav-link" rel="tooltip" title="Friends" data-placement="bottom" href="">
+              <a class="nav-link" rel="tooltip" title="Friends" data-placement="bottom" href="{% url 'potluck:friends' %}">
                 <i class="tim-icons icon-single-02"></i>
                 <p class="d-lg-none d-xl-none">Friends</p>
               </a>

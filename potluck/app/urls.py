@@ -18,4 +18,5 @@ urlpatterns = [
     path('add_item/<int:event_id>', views.addItem, name='addItem'),
     path('finish/<int:event_id>', views.finish, name='finish'),
     path('profile', views.profile, name='profile'),
+    path('friends', views.friends, name='friends')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
