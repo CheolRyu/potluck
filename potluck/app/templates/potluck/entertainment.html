@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <form class="js-validate" method="post" action="{% url 'potluck:addEntertainment' event.id %}">
+      {% csrf_token %}
+      <div class="container">
+        <h5 class="title">Sign up to bring entertainment</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="labels">
+              Entertainment Type
+              <span class="text-danger">*</span>
+            </label>
+            {{entertainmentForm.category}}
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+            <label class="labels">
+              What entertainment are you bringing?
+              <span class="text-danger">*</span>
+            </label>
+            <span id="description">{{entertainmentForm.description}}</span>
+          </div>
+        </div>
+        <br />
+        <div class="d-flex justify-content-between align-items-center">
+          <button id="add" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#cancel">Add</button>
+          <a id="finish" href="{% url 'potluck:finish' event.id %}" class="btn btn-primary btn-round">Finish</a>
+        </div>
+      </div>
+    </form>
+    <div class="tables-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto text-center">
+            <h2 class="title mb-4">Entertainment</h2>
+            <div class="section-space"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive mb-0">
+                    <table class="table table-pricing">
+                      <thead class="text-primary">
+                        <tr>
+                          <th class="p-5">
+                            <img src="{% static 'assets/img/bg4.png'%}" class="background">
+                            <img src="{% static 'assets/img/man-up.png'%}" class="man">
+                            <img src="{% static 'assets/img/girl-up.png'%}" class="girl">
+                          </th>
+                          <th class="text-center">
+                            <h3 class="card-title">Category</h3>
+                            <h5 class="desc">Type of Entertainment</h5>
+                          </th>
+                          <th class="text-center">
+                            <h3 class="card-title">Description</h3>
+                            <h5 class="desc">Entertainment being brought</h5>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="bg-primary">
+                          <td class="text-white">
+                            <b>Entertainment</b>
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                        </tr>
+                        {% for entertainment in entertainments %}
+                        <tr>
+                          <td>
+                            You Listed
+                          </td>
+                          <td>
+                            {{entertainment.category}}
+                          </td>
+                          <td>
+                            {{entertainment.description}}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
