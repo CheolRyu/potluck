@@ -139,3 +139,5 @@ GitHub.sublime-settings
 
 # Puppeteer Node project
 */node_modules
+
+*/mydatabase
