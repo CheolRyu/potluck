@@ -153,7 +153,7 @@ def attend(request, event_id):
     form = ItemUpdate()
     if request.method == 'POST':
         if 'status' in request.POST and request.POST['status'] == 'yes':
-            Item.objects.filter(event=event_id).update(fulilled=True)
+            # Item.objects.filter(event=event_id).update(fulfilled=True)
             return redirect('potluck:home')
         else:
             return redirect('potluck:home')

@@ -19,7 +19,7 @@
     <div class="container align-items-center">
       <div class="row">
         <div class="col-lg-4">
-          <h1 class="profile-title text-left">Mike Scheinder</h1>
+          <h1 class="profile-title text-left">Michelle Obama</h1>
           <h5 class="text-on-back">01</h5>
           <p class="profile-description">Offices parties lasting outward nothing age few resolve. Impression to discretion understood to we interested he excellence. Him remarkably use projection collecting. Going about eat forty world has round miles.</p>
           <div class="btn-wrapper profile pt-3">
@@ -38,23 +38,23 @@
           <div class="card card-coin card-plain">
             <div class="card-header">
               <img src="{% static 'assets/img/mike.jpg'%}" class="img-center img-fluid rounded-circle">
-              <h4 class="title">Transactions</h4>
+              <h4 class="title">Your Username</h4>
             </div>
             <div class="card-body">
               <ul class="nav nav-tabs nav-tabs-primary justify-content-center">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#linka">
-                    Wallet
+                    Hoted Potlucks
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#linkb">
-                    Send
+                    Attended Potlucks
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#linkc">
-                    News
+                    Reviews
                   </a>
                 </li>
               </ul>
@@ -65,50 +65,30 @@
                       <thead class=" text-primary">
                         <tr>
                           <th class="header">
-                            COIN
+                            Name
                           </th>
                           <th class="header">
-                            AMOUNT
+                            Date
                           </th>
                           <th class="header">
-                            VALUE
+                            Attendees
                           </th>
                         </tr>
                       </thead>
                       <tbody>
+                        {% for event in events %}
                         <tr>
                           <td>
-                            BTC
+                            {{event.name }}
                           </td>
                           <td>
-                            7.342
+                            {{event.start}}
                           </td>
                           <td>
-                            48,870.75 USD
+                            {{event.attendees}}
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            ETH
-                          </td>
-                          <td>
-                            30.737
-                          </td>
-                          <td>
-                            64,53.30 USD
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            XRP
-                          </td>
-                          <td>
-                            19.242
-                          </td>
-                          <td>
-                            18,354.96 USD
-                          </td>
-                        </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
@@ -173,7 +153,7 @@
   <section class="section">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-12 col-md-6 ml-auto">
           <div class="card card-plain">
             <div class="card-header">
               <h1 class="profile-title text-left">Your Information</h1>
@@ -217,34 +197,8 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-round float-right" rel="tooltip" data-original-title="Can't wait for your message" data-placement="right">Send text</button>
+                <button type="submit" class="btn btn-primary btn-round float-right" rel="tooltip" data-original-title="Can't wait for your message" data-placement="right">Update</button>
               </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 ml-auto">
-          <div class="info info-horizontal">
-            <div class="icon icon-primary">
-              <i class="tim-icons icon-square-pin"></i>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Find us at the office</h4>
-              <p> Bld Mihail Kogalniceanu, nr. 8,
-                <br> 7652 Bucharest,
-                <br> Romania
-              </p>
-            </div>
-          </div>
-          <div class="info info-horizontal">
-            <div class="icon icon-primary">
-              <i class="tim-icons icon-mobile"></i>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Give us a ring</h4>
-              <p> Michael Jordan
-                <br> +40 762 321 762
-                <br> Mon - Fri, 8:00-22:00
-              </p>
             </div>
           </div>
         </div>
